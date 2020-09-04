@@ -71,6 +71,7 @@ public class Task {
 
     public String getDescription() {
         return description;
+
     }
 
     public void setDescription(String description) {
@@ -83,5 +84,17 @@ public class Task {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                ", realisation=" + realisation +
+                ", description='" + description + '\'' +
+                ", deadline=" + deadline +
+                '}';
     }
 }
