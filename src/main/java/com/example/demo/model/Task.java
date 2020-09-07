@@ -15,7 +15,7 @@ public class Task {
     @Enumerated(EnumType. STRING)
     private Category category;
 
-    private boolean realisation;
+    private boolean ifToDo;
 
     private String description;
 
@@ -24,17 +24,17 @@ public class Task {
     public Task() {
     }
 
-    public Task(Long id, String name, Category category, boolean realisation, String description, Date deadline) {
+    public Task(Long id, String name, Category category, boolean ifToDo, String description, Date deadline) {
         this.id = id;
         this.name = name;
         this.category = category;
-        this.realisation = realisation;
+        this.ifToDo= ifToDo;
         this.description = description;
         this.deadline = deadline;
     }
 
-    public Task(String name, Category category, boolean realisation, String description, Date deadline) {
-        this (null, name, category, realisation, description, deadline);
+    public Task(String name, Category category, boolean ifTodo, String description, Date deadline) {
+        this (null, name, category, ifTodo, description, deadline);
     }
 
     public Long getId() {
@@ -61,17 +61,16 @@ public class Task {
         this.category = category;
     }
 
-    public boolean isRealisation() {
-        return realisation;
+    public boolean isIfToDo() {
+        return ifToDo;
     }
 
-    public void setRealisation(boolean realisation) {
-        this.realisation = realisation;
+    public void setIfToDo(boolean ifToDo) {
+        this.ifToDo = ifToDo;
     }
 
     public String getDescription() {
         return description;
-
     }
 
     public void setDescription(String description) {
@@ -92,7 +91,7 @@ public class Task {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", category=" + category +
-                ", realisation=" + realisation +
+                ", ifToDo=" + ifToDo +
                 ", description='" + description + '\'' +
                 ", deadline=" + deadline +
                 '}';
