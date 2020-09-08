@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <title>Lista zadań</title>
+</head>
+<body style="margin-right: 50%">
+<ul class="list-group">
+    <li class="list-group-item active" th:text="${listName}">LISTA ZADAN...</li>
+    <li class="list-group-item"
+        th:each="task : ${taskSet}"
+        th:style="${(task.ifToDo) ? 'background: rgba(255,0,0,0.50)' : '' }"
+        th:text="|${task.id}. ${task.name}, ${task.description}, ${task.deadline}|">
+<!--        th:text="|${task.id}. ${task.name}, ${task.category}, ${task.ifToDo}, ${task.description}, ${task.deadline}|">-->
+</ul>
+<div class="list-group-item">
+    <a href="/nowe">DODAJ NOWE ZADANIE</a><br>
+    <a href="/Done">POKAZ ZADANIA ZREALIZOWANE</a><br>
+    <a href="/ToDo">POKAZ ZADANIA DO REALIZACJI</a><br>
+    <a href="/kategoria">POKAZ ZADANIA Z KATEGORII</a><br>
+    <a href="/">POWRÓT DO LISTY ZADAN</a><br>
+</div>
+
+<div class="list-group-item">
+<form class="input-group input-group-sm mb-3" method="post" action="/makedone">
+        <input type="number" class="custom-select" name="id" placeholder="Podaj numer zadania">
+        <input class="input-group-text" type="submit" value="Zmień status zadania na zrealizowany">
+</form>
+</div>
+</body>
+</html>
