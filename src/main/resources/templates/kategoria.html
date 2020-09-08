@@ -2,17 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
     <title>Zadania w wybranej kategorii</title>
 </head>
 <body>
 
-<h3>Wyszukaj zadań w wybranej kategorii</h3>
-<form class="input-group input-group-sm mb-3" method="post" th:action="@{/category}">
-    <input type="text" th:field="${category}" placeholder="kategoria" required>
-    <input type="submit" value="Pokaż z tej kategorii">
+<div class="input-group-text">Wyszukaj zadań w wybranej kategorii:</div><br>
+<form class="input-group input-group-sm mb-3" method="post" action="/category">
+    <div class="input-group mb-3" style="margin-right: 50%">
+        <select class="custom-select" name="category">
+            <option selected>Wybierz...</option>
+            <option value="HOME">DOM</option>
+            <option value="WORK">PRACA</option>
+            <option value="OTHER">INNE</option>
+        </select>
+        <input class="input-group-text" type="submit" value="Pokaż z tej kategorii">
+    </div>
 </form>
-
 </body>
 </html>

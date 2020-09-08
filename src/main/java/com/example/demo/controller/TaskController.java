@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -24,11 +25,11 @@ public class TaskController {
     }
 
 
-    @GetMapping("/lista")
+    @GetMapping("/")
     public String getAll(Model model) {
-
         Set<Task> taskSet = taskRepository.findAllByOrderByIdAsc();
         model.addAttribute("taskSet", taskSet);
+        model.addAttribute("listName", "LISTA ZADAN");
 
         return "lista";
     }
@@ -40,7 +41,7 @@ public class TaskController {
         model.addAttribute("taskSet", taskSet);
         model.addAttribute("listName", "LISTA ZADAN DO WYKONANIA");
 
-        return "zadania";
+        return "lista";
     }
 
     @GetMapping("/Done")
@@ -50,26 +51,39 @@ public class TaskController {
         model.addAttribute("taskSet", taskSet);
         model.addAttribute("listName", "LISTA ZADAN WYKONANYCH (ARCHIWUM)");
 
-        return "zadania";
+        return "lista";
     }
 
     @GetMapping("/kategoria")
-    public String getUserForm1(Model model) {
+    public String getUserForm1() {
 
-        String attributeValue = null;
-        model.addAttribute("category", attributeValue);
+//        String attributeValue = null;
+//        model.addAttribute("category", attributeValue);
 
         return "kategoria";
     }
 
     @PostMapping("/category")
-    public String getAllByCategory(Model model, @RequestParam String category) {
+    public String getAllByCategory(Model model, @RequestParam Category category) {
 
-        Set<Task> taskSet = taskRepository.findByCategory(Category.valueOf(category));
+        Set<Task> taskSet = taskRepository.findByCategory(category);
         model.addAttribute("taskSet", taskSet);
-        model.addAttribute("listName", "LISTA ZADAN W KATEGORII: " + Category.valueOf(category));
+        model.addAttribute("listName", "LISTA ZADAN W KATEGORII: " + category);
 
-        return "zadania";
+        return "lista";
+    }
+
+    @PostMapping("/makedone")
+    public String makeDone(@RequestParam Long id) {
+        Task task = new Task();
+
+        Optional <Task> optionalTask = taskRepository.findById(id);
+        if(optionalTask.isPresent()) {
+            task = optionalTask.get();
+        }
+        task.setIfToDo(false);
+        taskRepository.save(task);
+        return "redirect:/";
     }
 
     @GetMapping("/nowe")
@@ -82,7 +96,7 @@ public class TaskController {
     @PostMapping("/add")
     public String add(Task task) {
         taskRepository.save(task);
-        return "redirect:/lista";
+        return "redirect:/";
     }
 
 }

@@ -8,14 +8,14 @@
 </head>
 <body>
 
-<h3>Dodaj nowe zadanie:</h3>
+<div class="input-group-text">Dodaj nowe zadanie:</div><br>
 <form class="input-group input-group-sm mb-3" method="post" th:action="@{/add}">
     <input type="text" th:field="*{task.name}" placeholder="nazwa zadania" required></br>
     <input type="text" th:field="*{task.category}" placeholder="kategoria" required>
     <input type="text" th:field="*{task.ifToDo}" placeholder="czy do zrobienia?" required></br>
     <input type="text" th:field="*{task.description}" placeholder="opis zadania" required>
     <input type="date" th:field="*{task.deadline}" placeholder="termin realizacji" required></br>
-    <input type="submit" value="Dodaj">
+    <input type="submit" value="Dodaj zadanie">
 </form>
 
 </body>
